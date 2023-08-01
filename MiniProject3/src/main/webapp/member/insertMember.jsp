@@ -14,7 +14,7 @@
 	MemberDao memberDao = new MemberDao();
 	Member member = new Member(memid, mname, pwd, phone);
 	
-	if (memberDao.getMemberListByMemid(memid).getMemid() == null) {
+	if (memberDao.getMemberByMemid(memid).getMemid() == null) {
 		memberDao.insertMember(member);
 		
 		message = "회원가입이 완료되었습니다. 환영합니다. " + memid + "님!";

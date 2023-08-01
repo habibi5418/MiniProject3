@@ -15,8 +15,8 @@
 	    </header>
 		<form action="findMemberUid.jsp" method="post" autocomplete="off">
 			<h1>FIND UID</h1>
-			<input id="name" type="text" name="name" placeholder="이름" required/><br/>
-			<input id="phone" type="text" name="phone" placeholder="전화번호" required/><br/>
+			<input id="mname" type="text" name="mname" maxlength="20" placeholder="이름" required/><br/>
+			<input id="phone" type="text" name="phone" maxlength="13" placeholder="전화번호" required/><br/>
 			<input type="submit" value="아이디 찾기"/><br/>
 			<div class="links">
 				<a href="joinForm.jsp">회원가입</a><span>|</span>

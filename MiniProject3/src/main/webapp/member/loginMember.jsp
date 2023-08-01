@@ -8,18 +8,22 @@
     String memid = request.getParameter("memid");
     String pwd = request.getParameter("pwd");
     String message = "";
+	String location = "";
     
     MemberDao memberDao = new MemberDao();
-    Member member = memberDao.getMemberListByMemid(memid);
+    Member member = memberDao.getMemberByMemid(memid);
+    
     if (member.getMemid() != null) {
         session.setAttribute("loginMember", member);
         message = member.getMemid() + " 계정의 로그인에 성공하였습니다.";
+		location = "../index.jsp";
     } else {
         message = "아이디 또는 비밀번호가 잘못되었습니다";
+		location = "loginForm.jsp";
     }
 %>
 
 <script>
 	alert("<%=message%>");
-	window.location.href = "../index.jsp";
+	window.location.href = "<%=location %>";
 </script>

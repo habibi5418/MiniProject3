@@ -47,8 +47,8 @@ public class MemberDao {
 		return memberList;
 	}
 	
-	// 2. Member 조건 조회 where memid = ?
-	public Member getMemberListByMemid(String memid) {
+	// 2-1. Member 조건 조회 where memid = ?
+	public Member getMemberByMemid(String memid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -80,6 +80,70 @@ public class MemberDao {
 		}
 		
 		return member;
+	}
+	
+	// 2-2. 아이디 찾기 where mname = ? and phone = ?
+	public String getMemidByMnamePhone(String mname, String phone) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		String memid = "";
+		
+		try {
+			conn = ConnectionHelper.getConnection("oracle");
+			sql = "select * from member where mname = ? and phone = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, mname);
+			pstmt.setString(2, phone);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) memid = rs.getString(1);
+			
+			System.out.println("찾은 아이디 : " + memid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionHelper.close(rs);
+			ConnectionHelper.close(pstmt);
+			ConnectionHelper.close(conn);
+		}
+		
+		return memid;
+	}
+	
+	// 2-3. 비밀번호 찾기 where memid = ? and mname = ?
+	public String getPwdByMemidMname(String memid, String mname) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		String pwd = "";
+		
+		try {
+			conn = ConnectionHelper.getConnection("oracle");
+			sql = "select * from member where memid = ? and mname = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memid);
+			pstmt.setString(2, mname);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) pwd = rs.getString(3);
+			
+			System.out.println("찾은 비밀번호 : " + pwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionHelper.close(rs);
+			ConnectionHelper.close(pstmt);
+			ConnectionHelper.close(conn);
+		}
+		
+		return pwd;
 	}
 
 	// 3. insert (memid, mname, pwd, phone)

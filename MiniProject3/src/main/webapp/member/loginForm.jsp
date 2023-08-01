@@ -15,7 +15,7 @@
 	    </header>
 		<form id="form" action="loginMember.jsp" method="post" autocomplete="off">
 			<h1>LOGIN</h1>
-			<input id="uid" type="text" name="memid" maxlength="20" placeholder="아이디" required/><br/>
+			<input id="memid" type="text" name="memid" maxlength="20" placeholder="아이디" required/><br/>
 			<input id="pwd" type="password" name="pwd" maxlength="20" placeholder="비밀번호" required/><br/>
 			<input id="submit" type="submit" value="로그인"/><br/>
 			<div class="links">

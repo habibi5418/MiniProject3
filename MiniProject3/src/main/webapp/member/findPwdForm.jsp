@@ -15,8 +15,8 @@
 	    </header>
 		<form action="findMemberPwd.jsp" method="post" autocomplete="off">
 			<h1>FIND PASSWORD</h1>
-			<input id="uid" type="text" name="uid" maxlength="8" placeholder="아이디" required="required"/><br/>
-			<input id="name" type="text" name="name" placeholder="이름" required="required"/><br/>
+			<input id="memid" type="text" name="memid" maxlength="20" placeholder="아이디" required="required"/><br/>
+			<input id="mname" type="text" name="mname" maxlength="20" placeholder="이름" required="required"/><br/>
 			<input type="submit" value="비밀번호 찾기"/><br/>
 			<div class="links">
 				<a href="joinForm.jsp">회원가입</a><span>|</span>
