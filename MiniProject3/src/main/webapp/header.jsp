@@ -1,8 +1,8 @@
 <%@page import="com.kosa.dto.Member"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-Member loginMember = (Member) session.getAttribute("loginMember");
-String root = request.getContextPath();
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	String root = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="ko">

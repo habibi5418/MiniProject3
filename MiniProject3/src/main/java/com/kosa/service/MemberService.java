@@ -2,10 +2,11 @@ package com.kosa.service;
 
 
 import com.kosa.dao.MemberDao;
+import com.kosa.dao.OracleMemberDao;
 import com.kosa.dto.Member;
 
 public class MemberService {
-	MemberDao memberDao;
+	MemberDao memberDao = new OracleMemberDao();
 	
 	// 생성자로 DB 지정. ex) oracle, mysql, maria ...
 	public MemberService(MemberDao memberDao) {
