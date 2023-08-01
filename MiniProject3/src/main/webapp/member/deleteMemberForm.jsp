@@ -15,7 +15,7 @@
 	    </header>
 		<form id="form" action="deleteMember.jsp" method="post" autocomplete="off">
 			<h1>LEAVE</h1>
-			<input type="hidden" name="uid" value="${loginMember.uid}"/> 
+			<input type="hidden" name="memid" value="${loginMember.memid}"/> 
 			<input id="pwd" type="password" name="pwd" maxlength="20" placeholder="비밀번호 확인"/><br/>
 			<input id="deleteBtn" type="button" value="탈퇴"/><br/>
 			<input type="button" onclick="location.href='myPage.jsp'" value="취소"/><br>

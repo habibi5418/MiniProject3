@@ -1,11 +1,12 @@
+<%@page import="com.kosa.service.MemberService"%>
+<%@page import="com.kosa.dao.OracleMemberDao"%>
+<%@page import="com.kosa.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="project.Member"%>
-<%@page import="project.MemberMethod" %>
 <%
-	MemberMethod method = new MemberMethod();
-	List<Member> memberList = method.memberList;
+	MemberDao memberDao = new OracleMemberDao();
+	MemberService memberService = new MemberService(memberDao);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,7 +29,7 @@
 				<th>이름</th>
 				<th>전화번호</th>
 			</tr>
-			<%=method.getAllMemberPrint() %>
+			<%=memberService.allMemberPrint() %>
 		</table>
 	    <footer>
 	    	<%@ include file="../footer.jsp" %>

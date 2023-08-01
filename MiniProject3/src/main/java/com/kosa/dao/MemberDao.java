@@ -12,5 +12,6 @@ public interface MemberDao {
 	public Member getMemberByMemidPwd(String memid, String pwd);
 	public int insertMember(Member member);
 	public int updateMember(Member member);
-	public int deleteMember(String memid);
+	public boolean deleteMember(String memid, String pwd);
+	public String getAllMemberPrint();
 }

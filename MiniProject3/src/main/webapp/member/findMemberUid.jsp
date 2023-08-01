@@ -1,3 +1,5 @@
+<%@page import="com.kosa.service.MemberService"%>
+<%@page import="com.kosa.dao.MemberDao"%>
 <%@page import="com.kosa.dao.OracleMemberDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -9,9 +11,11 @@
     	String message = "";
     	String location = "";
 
-    	OracleMemberDao memberDao = new OracleMemberDao();
-        String memid = memberDao.getMemidByMnamePhone(mname, phone);
-
+    	MemberDao memberDao = new OracleMemberDao();
+    	MemberService memberService = new MemberService(memberDao);
+    	
+		String memid = memberService.findMemid(mname, phone);
+    	
         if (!memid.equals("")) {
     		message = mname + "님의 아이디는 " + memid + "입니다.";
     		location = "loginForm.jsp";

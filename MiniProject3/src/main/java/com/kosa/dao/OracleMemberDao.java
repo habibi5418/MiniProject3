@@ -9,6 +9,7 @@ import java.util.List;
 import com.kosa.dto.Member;
 import com.kosa.utils.ConnectionHelper;
 
+// 오라클 DAO
 public class OracleMemberDao implements MemberDao {
 	
 	// 1. Member 테이블 전체 조회
@@ -244,23 +245,28 @@ public class OracleMemberDao implements MemberDao {
 		return row;
 	}
 
-	// 5. delete (memid)
-	public int deleteMember(String memid) {
+	// 5. delete (memid, pwd) 조건 where memid = ? and pwd = ?
+	public boolean deleteMember(String memid, String pwd) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		int row = 0;
+		boolean result = false;
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "delete from member where memid = ?";
+			sql = "delete from member where memid = ? and pwd = ?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, memid);
+			pstmt.setString(2, pwd);
 			
 			row = pstmt.executeUpdate();
 			
-			if (row > 0) System.out.println(memid + " 회원탈퇴 완료");
+			if (row > 0) {
+				result = true;
+				System.out.println(memid + " 회원탈퇴 완료");
+			}
 			else System.out.println("회원탈퇴 실패");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -269,6 +275,17 @@ public class OracleMemberDao implements MemberDao {
 			ConnectionHelper.close(conn);
 		}
 		
-		return row;
+		return result;
+	}
+
+	String table = "";
+	public String getAllMemberPrint() {
+		List<Member> memberList = getAllMemberList();
+		
+		memberList.stream().forEach(m -> {
+			table += "<tr><td>" + m.getMemid() + "</td><td>" + m.getPwd() + "</td><td>" + m.getMname() + "</td><td>" + m.getPhone() + "</td></tr>";
+		});
+		
+		return table;
 	}
 }

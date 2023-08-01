@@ -1,3 +1,5 @@
+<%@page import="com.kosa.service.MemberService"%>
+<%@page import="com.kosa.dao.MemberDao"%>
 <%@page import="com.kosa.dao.OracleMemberDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -8,8 +10,9 @@
     	String mname = request.getParameter("mname");
     	String message = "";
     	String location = "";
-    	
-    	OracleMemberDao memberDao = new OracleMemberDao();
+
+    	MemberDao memberDao = new OracleMemberDao();
+    	MemberService memberService = new MemberService(memberDao);
     	String pwd = memberDao.getPwdByMemidMname(memid, mname);
 
     	if (!pwd.equals("")) {
