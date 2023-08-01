@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+<meta mname="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
 <title>SSG LANDERS : 회원가입</title>
 <link rel="stylesheet" href="../css/style-index.css?ver=4131121">
 </head>
@@ -15,10 +15,10 @@
 	    </header>
 		<form action="insertMember.jsp" method="post" autocomplete="off">
 			<h1>JOIN</h1>
-			<input id="uid" type="text" name="uid" maxlength="8" placeholder="아이디 (영문과 숫자의 조합, 최대 8글자 제한)" required="required"/><br/>
+			<input id="memid" type="text" name="memid" maxlength="20" placeholder="아이디 (영문과 숫자의 조합, 최대 20글자 제한)" required="required"/><br/>
 			<input id="pwd" type="password" name="pwd" maxlength="20" placeholder="비밀번호(8~20자리 영문, 숫자, 특수문자의 조합)" required="required"/><br/>
 			<input id="pwd2" type="password" name="pwd2" maxlength="20" placeholder="비밀번호 확인" required="required"/><br/>
-			<input id="name" type="text" name="name" placeholder="이름(한글이나 영문)" required="required"/><br/>
+			<input id="mname" type="text" name="mname" placeholder="이름(한글이나 영문)" required="required"/><br/>
 			<input id="phone" type="text" name="phone" maxlength="13" placeholder="전화번호(숫자만 입력 가능. '-' 자동 작성)" required="required"/><br/>
 			<input type="submit" value="회원가입"/>
 		</form>
@@ -27,9 +27,9 @@
 	    </footer>
 	</div>
 	<script type="text/javascript">
-		function uidCheck(uid) {
-			var uidForm = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{1,8}$/;
-			return uidForm.test(uid);
+		function memidCheck(memid) {
+			var memidForm = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{2,20}$/;
+			return memidForm.test(memid);
 		}
 		function pwdCheck(pwd) {
 			var pwdForm = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,20}$/;
@@ -39,14 +39,14 @@
 			if (document.querySelector("#pwd").value == pwd2) return true;
 			return false;
 		}
-		function nameCheck(name) {
-			var nameForm = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]+$/;
-			return nameForm.test(name);
+		function mnameCheck(mname) {
+			var mnameForm = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]+$/;
+			return mnameForm.test(mname);
 		}
 		
-		document.querySelector("#uid").addEventListener("input", function() {
-			var uidResult = uidCheck(this.value);
-			if (!uidResult) {
+		document.querySelector("#memid").addEventListener("input", function() {
+			var memidResult = memidCheck(this.value);
+			if (!memidResult) {
 				this.setCustomValidity("아이디는 영문과 숫자가 각각 최소 1글자씩 포함된 조합만 가능합니다.");
 				this.reportValidity();
 			} else {
@@ -74,9 +74,9 @@
 				this.reportValidity();
 			}
 		});
-		document.querySelector("#name").addEventListener("input", function() {
-			var nameResult = nameCheck(this.value);
-			if (!nameResult) {
+		document.querySelector("#mname").addEventListener("input", function() {
+			var mnameResult = mnameCheck(this.value);
+			if (!mnameResult) {
 				this.setCustomValidity("이름은 한글과 영문만 사용이 가능합니다.");
 				this.reportValidity();
 			} else {
