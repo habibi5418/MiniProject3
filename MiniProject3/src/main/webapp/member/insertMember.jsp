@@ -1,14 +1,5 @@
 <%@page import="com.kosa.dao.MemberDao"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.io.BufferedOutputStream"%>
-<%@page import="java.io.FileOutputStream"%>
-<%@page import="java.io.ObjectOutputStream"%>
 <%@page import="com.kosa.dto.Member"%>
-<%@page import="java.util.List"%>
-<%@page import="java.io.FileInputStream"%>
-<%@page import="java.io.BufferedInputStream"%>
-<%@page import="java.io.ObjectInputStream"%>
-<%@page import="java.io.File"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <title>SSG LANDERS : 회원가입 페이지 </title>
 <%
@@ -23,7 +14,7 @@
 	MemberDao memberDao = new MemberDao();
 	Member member = new Member(memid, mname, pwd, phone);
 	
-	if (memberDao.getMemberListByMemid(memid) == null) {
+	if (memberDao.getMemberListByMemid(memid).getMemid() == null) {
 		memberDao.insertMember(member);
 		
 		message = "회원가입이 완료되었습니다. 환영합니다. " + memid + "님!";

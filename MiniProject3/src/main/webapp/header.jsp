@@ -1,5 +1,5 @@
+<%@page import="com.kosa.dto.Member"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="project.Member"%>
 <%
 Member loginMember = (Member) session.getAttribute("loginMember");
 String root = request.getContextPath();
@@ -53,7 +53,7 @@ String root = request.getContextPath();
 	    </li>
 	    <% if (loginMember != null) { %>
 	    <li id="header3">
-	      <a href="<%=root %>/member/myPage.jsp">${loginMember.name }님<br>반갑습니다.</a>
+	      <a href="<%=root %>/member/myPage.jsp">${loginMember.mname }님<br>반갑습니다.</a>
 	      <ul>
 	        <li><a href="<%=root %>/member/logoutMember.jsp">LOGOUT</a></li>
 	      	<li><a href="<%=root %>/member/myPage.jsp">MYPAGE</a></li>

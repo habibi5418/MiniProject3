@@ -70,7 +70,7 @@ public class MemberDao {
 				member.setPwd(rs.getString(3));
 				member.setPhone(rs.getString(4));
 			}
-			System.out.println(member);
+			System.out.println("조회한 멤버 : " + member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
