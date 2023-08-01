@@ -15,11 +15,13 @@
 	    </header>
 		<form action="insertMember.jsp" method="post" autocomplete="off">
 			<h1>JOIN</h1>
-			<input id="memid" type="text" name="memid" maxlength="20" placeholder="아이디 (영문과 숫자의 조합, 최대 20글자 제한)" required="required"/><br/>
+			<input id="memid" type="text" name="memid" maxlength="20" placeholder="아이디 (영문과 숫자의 조합, 최대 20글자 제한)" required="required"/>
+			<input type="button" value="중복 체크"/><br/>
 			<input id="pwd" type="password" name="pwd" maxlength="20" placeholder="비밀번호(8~20자리 영문, 숫자, 특수문자의 조합)" required="required"/><br/>
 			<input id="pwd2" type="password" name="pwd2" maxlength="20" placeholder="비밀번호 확인" required="required"/><br/>
 			<input id="mname" type="text" name="mname" maxlength="20" placeholder="이름(한글이나 영문)" required="required"/><br/>
 			<input id="phone" type="text" name="phone" maxlength="13" placeholder="전화번호(숫자만 입력 가능. '-' 자동 작성)" required="required"/><br/>
+			<input id="idcheck" type="hidden" name="idcheck" value="iduncheck"/>
 			<input type="submit" value="회원가입"/>
 		</form>
 	    <footer>

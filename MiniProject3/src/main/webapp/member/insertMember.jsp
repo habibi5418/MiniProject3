@@ -1,9 +1,9 @@
-<%@page import="com.kosa.dao.MemberDao"%>
+<%@page import="com.kosa.dao.OracleMemberDao"%>
 <%@page import="com.kosa.dto.Member"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <title>SSG LANDERS : 회원가입 페이지 </title>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 	String memid = request.getParameter("memid");
 	String pwd = request.getParameter("pwd");
 	String mname = request.getParameter("mname");
@@ -11,7 +11,7 @@
 	String message = "";
 	String location = "";
 
-	MemberDao memberDao = new MemberDao();
+	OracleMemberDao memberDao = new OracleMemberDao();
 	Member member = new Member(memid, mname, pwd, phone);
 	
 	if (memberDao.getMemberByMemid(memid).getMemid() == null) {
