@@ -9,5 +9,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/kosa/Documents/카카오톡 받은 파일/DB/ConnectionUtils/Oracle/javax.servlet.jsp.jstl-1.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kosa/Documents/카카오톡 받은 파일/DB/ConnectionUtils/Oracle/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kosa/Documents/카카오톡 받은 파일/DB/ConnectionUtils/Oracle/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/eclipse/json-20230227.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/eclipse/lombok.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
