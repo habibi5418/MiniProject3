@@ -36,7 +36,7 @@ public class OracleMemberDao implements MemberDao {
 					memberList.add(member);
 				} while (rs.next());
 			}
-			System.out.println(memberList);
+			System.out.println("전체 멤버 : " + memberList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
