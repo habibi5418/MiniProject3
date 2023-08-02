@@ -35,4 +35,14 @@ public class NoticeService {
 	public String allNoticePrint() {
 		return noticeDao.getAllNoticePrint();
 	}
+	
+	// 글 작성
+	public int write(String title, String contents, String writer_uid) {
+		return noticeDao.writeNotice(title, contents, writer_uid);
+	}
+	
+	// 글 수정
+	public int update(int noticeid, String title, String contents) {
+		return noticeDao.updateNotice(noticeid, title, contents);
+	}
 }

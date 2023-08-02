@@ -20,7 +20,7 @@
 	    </header>
 	    <div id="listContainer">
     		<% if (loginMember != null) { %>
-        		<a href="writeBoard.jsp" id="listWriteButton" class="detailBtns">글작성</a>
+        		<a href="writeBoardForm.jsp" id="listWriteButton" class="detailBtns">글작성</a>
 	  			<% if (loginMember.getMemid().equals("admin")) { %>
     				<a href="deleteBoards.jsp" id="listDeleteButton" class="detailBtns">삭제</a>
 		    	<% }

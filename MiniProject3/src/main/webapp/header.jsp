@@ -38,10 +38,11 @@
 	      </ul>
 	    </li>
 	    <li>
-	      <a href="#">MEDIA</a>
+	      <a href="<%=root %>/notice/listNotice.jsp">MEDIA</a>
 	      <ul>
-	        <li><a href="#">랜더스 소식</a></li>
+	        <li><a href="<%=root %>/notice/listNotice.jsp">공지사항</a></li>
 	        <li><a href="#">랜더스 포토</a></li>
+	        <li><a href="<%=root %>/board/listBoard.jsp">자유게시판</a></li>
 	      </ul>
 	    </li>
 	    <li>

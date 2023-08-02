@@ -73,7 +73,7 @@
       <div id="contents">
         <div id="tabMenu">
           <input type="radio" id="tab1" name="tabs" checked>
-          <label for="tab1">랜더스 소식</label>
+          <label for="tab1">공지사항</label>
           <input type="radio" id="tab2" name="tabs">
           <label for="tab2">랜더스 포토</label>
           <input type="radio" id="tab3" name="tabs">

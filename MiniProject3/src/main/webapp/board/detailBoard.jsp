@@ -33,10 +33,10 @@
 	  	</div>
 	  	<% if (loginMember != null) {
 	  			if (loginMember.getMemid().equals(board.getWriter_uid())) { %>
-			    	<a href="#" id="updateButton" class="detailBtns">수정</a>
-			    	<a href="#" id="deleteButton" class="detailBtns">삭제</a>
+			    	<a href="updateBoardForm.jsp?boardid=<%=board.getBoardid() %>" id="updateButton" class="detailBtns">수정</a>
+			    	<a href="deleteBoardForm.jsp?boardid=<%=board.getBoardid() %>" id="deleteButton" class="detailBtns">삭제</a>
 		    	<% } else if (loginMember.getMemid().equals("admin")) { %>
-		    		<a href="#" id="deleteButton" class="detailBtns">삭제</a>
+		    		<a href="deleteBoardForm.jsp?boardid=<%=board.getBoardid() %>" id="deleteButton" class="detailBtns">삭제</a>
 		    	<% }
 	  		} %>
   	</div>

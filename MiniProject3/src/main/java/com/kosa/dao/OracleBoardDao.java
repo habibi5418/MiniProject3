@@ -92,9 +92,9 @@ public class OracleBoardDao implements BoardDao {
 		return board;
 	}
 	
-	// 3. insert (boardid, title, contents, writer_uid)
+	// 3. insert (title, contents, writer_uid)
 	@Override
-	public int insertBoard(Board board) {
+	public int writeBoard(String title, String contents, String writer_uid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -102,17 +102,16 @@ public class OracleBoardDao implements BoardDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "insert into board(boardid, title, contents, writer_uid) values(?, ?, ?, ?)";
+			sql = "insert into board(boardid, title, contents, writer_uid) values(seq_board.nextval, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, board.getBoardid());
-			pstmt.setString(2, board.getTitle());
-			pstmt.setString(3, board.getContents());
-			pstmt.setString(4, board.getWriter_uid());
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setString(3, writer_uid);
 			
 			row = pstmt.executeUpdate();
 			
-			if (row > 0) System.out.println(board + " 글 작성 완료");
+			if (row > 0) System.out.println("글 작성 완료");
 			else System.out.println("글 작성 실패");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,7 +125,7 @@ public class OracleBoardDao implements BoardDao {
 
 	// 4. update (title, contents, mod_date) 조건 where boardid = ?
 	@Override
-	public int updateBoard(Board board) {
+	public int updateBoard(int boardid, String title, String contents) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -134,17 +133,16 @@ public class OracleBoardDao implements BoardDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "update board set title = ?, contents = ?, mod_date = ? where boardid = ?";
+			sql = "update board set title = ?, contents = ?, mod_date = sysdate where boardid = ?";
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, board.getTitle());
-			pstmt.setString(2, board.getContents());
-			pstmt.setString(3, board.getMod_date());
-			pstmt.setInt(4, board.getBoardid());
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setInt(3, boardid);
 			
 			row = pstmt.executeUpdate();
 			
-			if (row > 0) System.out.println(board + " 글 수정 완료");
+			if (row > 0) System.out.println(boardid + "번 글 수정 완료");
 			else System.out.println("글 수정 실패");
 		} catch (Exception e) {
 			e.printStackTrace();

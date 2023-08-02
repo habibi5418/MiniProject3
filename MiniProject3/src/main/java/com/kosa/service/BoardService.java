@@ -35,4 +35,14 @@ public class BoardService {
 	public String allBoardPrint() {
 		return boardDao.getAllBoardPrint();
 	}
+	
+	// 글 작성
+	public int write(String title, String contents, String writer_uid) {
+		return boardDao.writeBoard(title, contents, writer_uid);
+	}
+	
+	// 글 수정
+	public int update(int boardid, String title, String contents) {
+		return boardDao.updateBoard(boardid, title, contents);
+	}
 }

@@ -11,7 +11,9 @@ body {
 	margin: 0 auto;
 	background: linear-gradient(rgba(255, 255, 255, 0.88),
 		rgba(255, 255, 255, 0.88)), url("../images/background.jpg");
-	background-size: 100% 608px;
+	background-size: 100%;
+	background-attachment: fixed;
+	background-position: center;
 }
 
 footer {
@@ -225,7 +227,7 @@ nav {
 #more {
 	color: #666;
 	font-size: 12px;
-	margin-left: 118px;
+	margin-left: 140px;
 }
 
 #more:hover {
@@ -593,6 +595,11 @@ form p {
   margin: 90px auto 0;
   max-width: 1000px;
 }
+#writeContainer {
+  position: relative;
+  margin: 90px auto 0;
+  max-width: 1000px;
+}
 #listContainer {
   position: relative;
   max-width: 100%;
@@ -696,4 +703,36 @@ form p {
 }
 .table tr td a:hover {
 	text-decoration: underline;
+}
+
+/* 작성페이지 */
+#detailBoard form {
+    margin-top: 30px;
+}
+
+#detailBoard input[type="text"],
+#detailBoard textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#detailBoard textarea {
+    resize: vertical;
+}
+
+#detailBoard input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #C8102E;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#detailBoard input[type="submit"]:hover {
+    background-color: #96091D;
 }

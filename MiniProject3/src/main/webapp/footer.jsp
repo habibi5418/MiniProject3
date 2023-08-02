@@ -8,7 +8,7 @@ String root2 = request.getContextPath();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SSG LANDERS</title>
-  <link rel="stylesheet" href="<%=root2 %>/css/style-index.css?ver=212">
+  <link rel="stylesheet" href="<%=root2 %>/css/style-index.css?ver=2123">
 </head>
 <body>
 	<div id="bottomMenu">

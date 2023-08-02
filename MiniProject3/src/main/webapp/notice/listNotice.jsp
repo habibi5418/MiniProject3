@@ -21,7 +21,7 @@
 	    <div id="listContainer">
 	    	<% if (loginMember != null) {
 	  			if (loginMember.getMemid().equals("admin")) { %>
-    				<a href="writeNotice.jsp" id="listWriteButton" class="detailBtns">글작성</a>
+    				<a href="writeNoticeForm.jsp" id="listWriteButton" class="detailBtns">글작성</a>
     				<a href="deleteNotices.jsp" id="listDeleteButton" class="detailBtns">삭제</a>
 		    	<% }
 	  		} %>

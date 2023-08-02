@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	//Member loginMember = session.getAttribute("loginMember");
 	int noticeid = Integer.parseInt(request.getParameter("noticeid"));
 	NoticeService noticeService = new NoticeService();
 	noticeService.increaseViews(noticeid);
@@ -34,8 +33,8 @@
 	  	</div>
 	  	<% if (loginMember != null) {
 	  			if (loginMember.getMemid().equals("admin")) { %>
-			    	<a href="#" id="updateButton" class="detailBtns">수정</a>
-			    	<a href="#" id="deleteButton" class="detailBtns">삭제</a>
+			    	<a href="updateNoticeForm.jsp?noticeid=<%=notice.getNoticeid() %>" id="updateButton" class="detailBtns">수정</a>
+			    	<a href="deleteNoticeForm.jsp?noticeid=<%=notice.getNoticeid() %>" id="deleteButton" class="detailBtns">삭제</a>
 		    	<% }
 	  		} %>
   	</div>

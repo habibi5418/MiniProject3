@@ -96,7 +96,7 @@ public class OracleNoticeDao implements NoticeDao {
 	
 	// 3. insert (noticeid, title, contents, writer_uid)
 	@Override
-	public int insertNotice(Notice notice) {
+	public int writeNotice(String title, String contents, String writer_uid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -104,17 +104,16 @@ public class OracleNoticeDao implements NoticeDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "insert into notice(noticeid, title, contents, writer_uid) values(?, ?, ?, ?)";
+			sql = "insert into notice(noticeid, title, contents, writer_uid) values(seq_notice.nextval, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, notice.getNoticeid());
-			pstmt.setString(2, notice.getTitle());
-			pstmt.setString(3, notice.getContents());
-			pstmt.setString(4, notice.getWriter_uid());
+
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setString(3, writer_uid);
 			
 			row = pstmt.executeUpdate();
 			
-			if (row > 0) System.out.println(notice + " 글 작성 완료");
+			if (row > 0) System.out.println("글 작성 완료");
 			else System.out.println("글 작성 실패");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,7 +127,7 @@ public class OracleNoticeDao implements NoticeDao {
 
 	// 4. update (title, contents, mod_date) 조건 where noticeid = ?
 	@Override
-	public int updateNotice(Notice notice) {
+	public int updateNotice(int noticeid, String title, String contents) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -136,17 +135,16 @@ public class OracleNoticeDao implements NoticeDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "update notice set title = ?, contents = ?, mod_date = ? where noticeid = ?";
+			sql = "update notice set title = ?, contents = ?, mod_date = sysdate where noticeid = ?";
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, notice.getTitle());
-			pstmt.setString(2, notice.getContents());
-			pstmt.setString(3, notice.getMod_date());
-			pstmt.setInt(4, notice.getNoticeid());
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setInt(3, noticeid);
 			
 			row = pstmt.executeUpdate();
 			
-			if (row > 0) System.out.println(notice + " 글 수정 완료");
+			if (row > 0) System.out.println(noticeid + "번 글 수정 완료");
 			else System.out.println("글 수정 실패");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -7,8 +7,8 @@ import com.kosa.dto.Board;
 public interface BoardDao {
 	List<Board> getAllBoardList();
 	Board getBoardByBoardid(int boardid);
-	int insertBoard(Board board);
-	int updateBoard(Board board);
+	public int writeBoard(String title, String contents, String writer_uid);
+	int updateBoard(int boardid, String title, String contents);
 	boolean deleteBoard(int boardid);
 	List<Board> findRecent5();
 	void increaseViews(int boardid, int view_count);
