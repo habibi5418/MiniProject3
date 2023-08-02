@@ -22,8 +22,8 @@ public class OracleBoardDao implements BoardDao {
 		List<Board> boardList = new ArrayList<>();
 				
 		try {
-			conn = ConnectionHelper.getConnection("oracle");
-			sql = "select * from board";
+			conn = ConnectionHelper.getConnection("oracle"); 
+			sql = "select * from board order by boardid desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -52,7 +52,7 @@ public class OracleBoardDao implements BoardDao {
 		return boardList;
 	}
 	
-	// 2-1. Board 조건 조회 where boardid = ?
+	// 2. Board 조건 조회 where boardid = ?
 	@Override
 	public Board getBoardByBoardid(int boardid) {
 		Connection conn = null;
@@ -218,7 +218,6 @@ public class OracleBoardDao implements BoardDao {
 					boardList.add(board);
 				} while (rs.next());
 			}
-			System.out.println("최근 게시물 5개 : " + boardList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -228,5 +227,46 @@ public class OracleBoardDao implements BoardDao {
 		}
 		
 		return boardList;
+	}
+	
+	@Override
+	public void increaseViews(int boardid, int view_count) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		int row = 0;
+		
+		try {
+			conn = ConnectionHelper.getConnection("oracle");
+			sql = "update board set view_count = ? where boardid = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, view_count + 1);
+			pstmt.setInt(2, boardid);
+			
+			row = pstmt.executeUpdate();
+			
+			if (row > 0) {
+				System.out.println(boardid + "번 글 조회수 " + (view_count + 1) + "로 증가");
+			}
+			else System.out.println("조회수 증가 실패");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionHelper.close(pstmt);
+			ConnectionHelper.close(conn);
+		}
+	}
+	
+	String table = "";
+	@Override
+	public String getAllBoardPrint() {
+		List<Board> boardList = getAllBoardList();
+		
+		boardList.stream().forEach(m -> {
+			table += "<tr><td>" + "<input type='checkbox'>" + "</td><td><a href='detailBoard.jsp?boardid=" + m.getBoardid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
+		});
+		
+		return table;
 	}
 }

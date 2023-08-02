@@ -10,8 +10,8 @@
 body {
 	margin: 0 auto;
 	background: linear-gradient(rgba(255, 255, 255, 0.88),
-		rgba(255, 255, 255, 0.88)), url("../images/background.jpg") center;
-	background-size: cover;
+		rgba(255, 255, 255, 0.88)), url("../images/background.jpg");
+	background-size: 100% 608px;
 }
 
 footer {
@@ -223,9 +223,13 @@ nav {
 }
 
 #more {
-	color: #888;
+	color: #666;
 	font-size: 12px;
-	margin-left: 116px;
+	margin-left: 118px;
+}
+
+#more:hover {
+	cursor: pointer;
 }
 
 .tabContent { /* 탭 내용 스타일 */
@@ -259,7 +263,9 @@ nav {
 	overflow: hidden;
 	max-width: calc(100% - 70px); /* 오른쪽에 붙는 span 요소 고려하여 최대 너비 설정 */
 }
-
+#tabMenu div ul li a:hover {
+	text-decoration: underline;
+}
 #notice ul li span {
 	color: gray;
 	font-size: 10px;
@@ -656,4 +662,18 @@ form p {
 .view-count {
   color: #888;
   font-size: 14px;
+}
+.table tr td a {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.table tr td a:link {
+	color: black;
+}
+.table tr td a:visited {
+	color: black;
+}
+.table tr td a:hover {
+	text-decoration: underline;
 }

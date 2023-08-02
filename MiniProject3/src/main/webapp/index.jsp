@@ -55,7 +55,7 @@
           <label for="tab2">랜더스 포토</label>
           <input type="radio" id="tab3" name="tabs">
           <label for="tab3">자유게시판</label>
-          <a id="more" href="#">전체 보기</a>
+          <a id="more">전체 보기</a>
           <div id="notice" class="tabContent">
             <ul>
               <li><a href="#"><%=recentBoardList.get(0).getTitle() %></a><span><%=recentBoardList.get(0).getReg_date().substring(0, 10) %></span></li>
@@ -116,5 +116,21 @@
   </div>
   <script src="js/lightbox.js?ver=45"></script>
   <script src="js/slideshow.js?ver=45"></script>
+  <script type="text/javascript">
+  	document.querySelector("#more").addEventListener("click", function() {
+  		var tabs = document.getElementsByName("tabs");
+  		var checked;
+  		
+  		tabs.forEach(tab => {
+  			if (tab.checked) checked = tab.getAttribute('id');
+  		})
+
+  		if (checked == "tab1") {
+  			location.href = "notice/listNotice.jsp";
+  		} else if (checked == "tab3") {
+  			location.href = "board/listBoard.jsp";
+  		}
+  	});
+  </script>
 </body>
 </html>

@@ -5,13 +5,14 @@
 <%
 	int boardid = Integer.parseInt(request.getParameter("boardid"));
 	BoardService boardService = new BoardService();
+	boardService.increaseViews(boardid);
 	Board board = boardService.getBoardByBoardid(boardid);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시물 상세페이지 - <%=board.getTitle() %></title>
 <link rel="stylesheet" href="../css/style-index.css?ver=1">
 </head>
 <body>
@@ -20,7 +21,7 @@
     	<%@ include file="../header.jsp" %>
     </header>
     <div id="detailContainer">
-    	<a href="#" id="listButton" class="detailBtns">목록</a>
+    	<a href="listBoard.jsp" id="listButton" class="detailBtns">목록</a>
 		<div id="detailBoard">
 			<div id="detailTitle">
 			    <h1><%=board.getTitle() %></h1>
