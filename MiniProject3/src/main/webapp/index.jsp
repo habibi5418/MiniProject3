@@ -1,11 +1,36 @@
+<%@page import="com.kosa.dto.Board"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kosa.service.BoardService"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	BoardService boardService = new BoardService();
+	List<Board> recentBoardList = boardService.recent();
+
+	int boardid1 = recentBoardList.get(0).getBoardid();
+	int boardid2 = recentBoardList.get(1).getBoardid();
+	int boardid3 = recentBoardList.get(2).getBoardid();
+	int boardid4 = recentBoardList.get(3).getBoardid();
+	int boardid5 = recentBoardList.get(4).getBoardid();
+
+	String title1 = recentBoardList.get(0).getTitle();
+	String title2 = recentBoardList.get(1).getTitle();
+	String title3 = recentBoardList.get(2).getTitle();
+	String title4 = recentBoardList.get(3).getTitle();
+	String title5 = recentBoardList.get(4).getTitle();
+	
+	String red_date1 = recentBoardList.get(0).getReg_date().substring(0, 10);
+	String red_date2 = recentBoardList.get(1).getReg_date().substring(0, 10);
+	String red_date3 = recentBoardList.get(2).getReg_date().substring(0, 10);
+	String red_date4 = recentBoardList.get(3).getReg_date().substring(0, 10);
+	String red_date5 = recentBoardList.get(4).getReg_date().substring(0, 10);
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SSG LANDERS</title>
-  <link rel="stylesheet" href="css/style-index.css?ver=2">
+  <link rel="stylesheet" href="css/style-index.css?ver=232">
 </head>
 <body>
   <div id="container">
@@ -28,13 +53,16 @@
           <label for="tab1">랜더스 소식</label>
           <input type="radio" id="tab2" name="tabs">
           <label for="tab2">랜더스 포토</label>
+          <input type="radio" id="tab3" name="tabs">
+          <label for="tab3">자유게시판</label>
+          <a id="more" href="#">전체 보기</a>
           <div id="notice" class="tabContent">
             <ul>
-              <li><a href="#">SSG랜더스 이재원, 인하대병원과 함께 ‘23시즌 희망 드림 캠페인’ 협약 체결</a><span>2023.06.30</span></li>
-              <li><a href="#">SSG랜더스 추신수, ‘행복 랜딩’ 캠페인으로 3년째 기부 프로그램 추진</a><span>2023.06.30</span></li>
-              <li><a href="#">SSG랜더스, ‘헤드앤숄더와 함께하는 쓱싹데이’ 실시</a><span>2023.06.27</span></li>
-              <li><a href="#">SSG랜더스, CJ제일제당과 함께 ‘고메 소바바치킨 브랜드 데이’ 실시</a><span>2023.06.24</span></li>
-              <li><a href="#">SSG랜더스, 시즌 네 번째 만원 관중 달성</a><span>2023.06.18</span></li>
+              <li><a href="#"><%=recentBoardList.get(0).getTitle() %></a><span><%=recentBoardList.get(0).getReg_date().substring(0, 10) %></span></li>
+              <li><a href="#"><%=recentBoardList.get(1).getTitle() %></a><span><%=recentBoardList.get(1).getReg_date().substring(0, 10) %></span></li>
+              <li><a href="#"><%=recentBoardList.get(2).getTitle() %></a><span><%=recentBoardList.get(2).getReg_date().substring(0, 10) %></span></li>
+              <li><a href="#"><%=recentBoardList.get(3).getTitle() %></a><span><%=recentBoardList.get(3).getReg_date().substring(0, 10) %></span></li>
+              <li><a href="#"><%=recentBoardList.get(4).getTitle() %></a><span><%=recentBoardList.get(4).getReg_date().substring(0, 10) %></span></li>
             </ul>
           </div>
           <div id="gallery" class="tabContent">
@@ -44,6 +72,15 @@
           	<span id="photo4" data-src="images/photo4.jpg" class="pic"></span>
           	<span id="photo5" data-src="images/photo5.jpg" class="pic"></span>
           	<span id="photo6" data-src="images/photo6.jpg" class="pic"></span>
+          </div>
+          <div id="board" class="tabContent">
+            <ul>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid1 %>"><%=title1 %></a><span><%=red_date1 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid2 %>"><%=title2 %></a><span><%=red_date2 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid3 %>"><%=title3 %></a><span><%=red_date3 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid4 %>"><%=title4 %></a><span><%=red_date4 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid5 %>"><%=title5 %></a><span><%=red_date5 %></span></li>
+            </ul>
           </div>
         </div>
         <div id="links">
