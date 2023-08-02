@@ -6,7 +6,7 @@
     pageEncoding="utf-8"%>
 <title>SSG LANDERS : 로그인 페이지</title>    
 <%
-    request.setCharacterEncoding("UTF-8");
+   		request.setCharacterEncoding("UTF-8");
         String memid = request.getParameter("memid");
         String pwd = request.getParameter("pwd");
         String message = "";

@@ -1,3 +1,5 @@
+<%@page import="com.kosa.dto.Notice"%>
+<%@page import="com.kosa.service.NoticeService"%>
 <%@page import="com.kosa.dto.Board"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kosa.service.BoardService"%>
@@ -18,11 +20,32 @@
 	String title4 = recentBoardList.get(3).getTitle();
 	String title5 = recentBoardList.get(4).getTitle();
 	
-	String red_date1 = recentBoardList.get(0).getReg_date().substring(0, 10);
-	String red_date2 = recentBoardList.get(1).getReg_date().substring(0, 10);
-	String red_date3 = recentBoardList.get(2).getReg_date().substring(0, 10);
-	String red_date4 = recentBoardList.get(3).getReg_date().substring(0, 10);
-	String red_date5 = recentBoardList.get(4).getReg_date().substring(0, 10);
+	String reg_date1 = recentBoardList.get(0).getReg_date().substring(0, 10);
+	String reg_date2 = recentBoardList.get(1).getReg_date().substring(0, 10);
+	String reg_date3 = recentBoardList.get(2).getReg_date().substring(0, 10);
+	String reg_date4 = recentBoardList.get(3).getReg_date().substring(0, 10);
+	String reg_date5 = recentBoardList.get(4).getReg_date().substring(0, 10);
+
+	NoticeService noticeService = new NoticeService();
+	List<Notice> recentNoticeList = noticeService.recent();
+
+	int noticeid1 = recentNoticeList.get(0).getNoticeid();
+	int noticeid2 = recentNoticeList.get(1).getNoticeid();
+	int noticeid3 = recentNoticeList.get(2).getNoticeid();
+	int noticeid4 = recentNoticeList.get(3).getNoticeid();
+	int noticeid5 = recentNoticeList.get(4).getNoticeid();
+
+	String ntitle1 = recentNoticeList.get(0).getTitle();
+	String ntitle2 = recentNoticeList.get(1).getTitle();
+	String ntitle3 = recentNoticeList.get(2).getTitle();
+	String ntitle4 = recentNoticeList.get(3).getTitle();
+	String ntitle5 = recentNoticeList.get(4).getTitle();
+	
+	String nreg_date1 = recentNoticeList.get(0).getReg_date().substring(0, 10);
+	String nreg_date2 = recentNoticeList.get(1).getReg_date().substring(0, 10);
+	String nreg_date3 = recentNoticeList.get(2).getReg_date().substring(0, 10);
+	String nreg_date4 = recentNoticeList.get(3).getReg_date().substring(0, 10);
+	String nreg_date5 = recentNoticeList.get(4).getReg_date().substring(0, 10);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -58,11 +81,11 @@
           <a id="more">전체 보기</a>
           <div id="notice" class="tabContent">
             <ul>
-              <li><a href="#"><%=recentBoardList.get(0).getTitle() %></a><span><%=recentBoardList.get(0).getReg_date().substring(0, 10) %></span></li>
-              <li><a href="#"><%=recentBoardList.get(1).getTitle() %></a><span><%=recentBoardList.get(1).getReg_date().substring(0, 10) %></span></li>
-              <li><a href="#"><%=recentBoardList.get(2).getTitle() %></a><span><%=recentBoardList.get(2).getReg_date().substring(0, 10) %></span></li>
-              <li><a href="#"><%=recentBoardList.get(3).getTitle() %></a><span><%=recentBoardList.get(3).getReg_date().substring(0, 10) %></span></li>
-              <li><a href="#"><%=recentBoardList.get(4).getTitle() %></a><span><%=recentBoardList.get(4).getReg_date().substring(0, 10) %></span></li>
+              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid1 %>"><%=ntitle1 %></a><span><%=nreg_date1 %></span></li>
+              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid2 %>"><%=ntitle2 %></a><span><%=nreg_date2 %></span></li>
+              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid3 %>"><%=ntitle3 %></a><span><%=nreg_date3 %></span></li>
+              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid4 %>"><%=ntitle4 %></a><span><%=nreg_date4 %></span></li>
+              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid5 %>"><%=ntitle5 %></a><span><%=nreg_date5 %></span></li>
             </ul>
           </div>
           <div id="gallery" class="tabContent">
@@ -75,11 +98,11 @@
           </div>
           <div id="board" class="tabContent">
             <ul>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid1 %>"><%=title1 %></a><span><%=red_date1 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid2 %>"><%=title2 %></a><span><%=red_date2 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid3 %>"><%=title3 %></a><span><%=red_date3 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid4 %>"><%=title4 %></a><span><%=red_date4 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid5 %>"><%=title5 %></a><span><%=red_date5 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid1 %>"><%=title1 %></a><span><%=reg_date1 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid2 %>"><%=title2 %></a><span><%=reg_date2 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid3 %>"><%=title3 %></a><span><%=reg_date3 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid4 %>"><%=title4 %></a><span><%=reg_date4 %></span></li>
+              <li><a href="board/detailBoard.jsp?boardid=<%=boardid5 %>"><%=title5 %></a><span><%=reg_date5 %></span></li>
             </ul>
           </div>
         </div>

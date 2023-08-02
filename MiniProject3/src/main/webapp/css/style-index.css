@@ -593,6 +593,10 @@ form p {
   margin: 90px auto 0;
   max-width: 1000px;
 }
+#listContainer {
+  position: relative;
+  max-width: 100%;
+}
 .detailBtns {
   padding: 10px 20px;
   background-color: #C8102E;
@@ -601,20 +605,36 @@ form p {
   border-radius: 4px;
   cursor: pointer;
 }
+#listWriteButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+#listWriteButton:hover {
+  background-color: #96091D;
+}
+#listDeleteButton {
+  position: absolute;
+  top: 0px;
+  right: 100px;
+}
+#listDeleteButton:hover {
+  background-color: #96091D;
+}
 #listButton {
   position: absolute;
   top: -50px;
-  right: 10px;
+  right: 0px;
 }
 #updateButton {
   position: absolute;
   bottom: -50px;
-  right: 90px;
+  right: 80px;
 }
 #deleteButton {
   position: absolute;
   bottom: -50px;
-  right: 10px;
+  right: 00px;
 }
 
 #listButton:hover {

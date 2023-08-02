@@ -260,11 +260,22 @@ public class OracleBoardDao implements BoardDao {
 	
 	String table = "";
 	@Override
-	public String getAllBoardPrint() {
+	public String getAllBoardPrintAdmin() {
 		List<Board> boardList = getAllBoardList();
 		
 		boardList.stream().forEach(m -> {
 			table += "<tr><td>" + "<input type='checkbox'>" + "</td><td><a href='detailBoard.jsp?boardid=" + m.getBoardid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
+		});
+		
+		return table;
+	}
+	
+	@Override
+	public String getAllBoardPrint() {
+		List<Board> boardList = getAllBoardList();
+		
+		boardList.stream().forEach(m -> {
+			table += "<tr><td><a href='detailBoard.jsp?boardid=" + m.getBoardid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
 		});
 		
 		return table;

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 상세페이지 - <%=board.getTitle() %></title>
+<title>자유게시판 게시물 상세페이지 - <%=board.getTitle() %></title>
 <link rel="stylesheet" href="../css/style-index.css?ver=1">
 </head>
 <body>
@@ -31,8 +31,14 @@
 		    </div>
 		    <p class="contents"><%=board.getContents() %></p>
 	  	</div>
-    	<a href="#" id="updateButton" class="detailBtns">수정</a>
-    	<a href="#" id="deleteButton" class="detailBtns">삭제</a>
+	  	<% if (loginMember != null) {
+	  			if (loginMember.getMemid().equals(board.getWriter_uid())) { %>
+			    	<a href="#" id="updateButton" class="detailBtns">수정</a>
+			    	<a href="#" id="deleteButton" class="detailBtns">삭제</a>
+		    	<% } else if (loginMember.getMemid().equals("admin")) { %>
+		    		<a href="#" id="deleteButton" class="detailBtns">삭제</a>
+		    	<% }
+	  		} %>
   	</div>
     <footer>
     	<%@ include file="../footer.jsp" %>

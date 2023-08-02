@@ -2,13 +2,16 @@ package com.kosa.dao;
 
 import java.util.List;
 
-import com.kosa.dto.Board;
+import com.kosa.dto.Notice;
 
 public interface NoticeDao {
-	List<Board> getAllBoardList();
-	Board getBoardByBoardid(int boardid);
-	int insertBoard(Board board);
-	int updateBoard(Board board);
-	boolean deleteBoard(int boardid);
-	List<Board> findRecent5();
+	List<Notice> getAllNoticeList();
+	Notice getNoticeByNoticeid(int noticeid);
+	int insertNotice(Notice notice);
+	int updateNotice(Notice notice);
+	boolean deleteNotice(int noticeid);
+	List<Notice> findRecent5();
+	void increaseViews(int noticeid, int view_count);
+	String getAllNoticePrintAdmin();
+	String getAllNoticePrint();
 }

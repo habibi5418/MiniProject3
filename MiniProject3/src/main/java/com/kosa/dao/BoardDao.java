@@ -12,5 +12,6 @@ public interface BoardDao {
 	boolean deleteBoard(int boardid);
 	List<Board> findRecent5();
 	void increaseViews(int boardid, int view_count);
+	String getAllBoardPrintAdmin();
 	String getAllBoardPrint();
 }

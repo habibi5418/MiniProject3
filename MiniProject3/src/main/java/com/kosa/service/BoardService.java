@@ -26,6 +26,11 @@ public class BoardService {
 		boardDao.increaseViews(boardid, board.getView_count());
 	}
 	
+	// 전체 게시물 가져오기 (관리자용)
+	public String allBoardPrintAdmin() {
+		return boardDao.getAllBoardPrintAdmin();
+	}
+	
 	// 전체 게시물 가져오기
 	public String allBoardPrint() {
 		return boardDao.getAllBoardPrint();

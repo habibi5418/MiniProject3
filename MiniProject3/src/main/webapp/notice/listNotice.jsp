@@ -1,16 +1,16 @@
 <%@page import="java.util.List"%>
-<%@page import="com.kosa.service.BoardService"%>
-<%@page import="com.kosa.dto.Board"%>
+<%@page import="com.kosa.service.NoticeService"%>
+<%@page import="com.kosa.dto.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	BoardService boardService = new BoardService();
+	NoticeService noticeService = new NoticeService();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 목록</title>
+<title>공지사항 목록</title>
 <link rel="stylesheet" href="../css/style-index.css?ver=12">
 </head>
 <body>
@@ -19,14 +19,14 @@
 	    	<%@ include file="../header.jsp" %>
 	    </header>
 	    <div id="listContainer">
-    		<% if (loginMember != null) { %>
-        		<a href="writeBoard.jsp" id="listWriteButton" class="detailBtns">글작성</a>
-	  			<% if (loginMember.getMemid().equals("admin")) { %>
-    				<a href="deleteBoards.jsp" id="listDeleteButton" class="detailBtns">삭제</a>
+	    	<% if (loginMember != null) {
+	  			if (loginMember.getMemid().equals("admin")) { %>
+    				<a href="writeNotice.jsp" id="listWriteButton" class="detailBtns">글작성</a>
+    				<a href="deleteNotices.jsp" id="listDeleteButton" class="detailBtns">삭제</a>
 		    	<% }
 	  		} %>
 			<table class="table">
-				<caption>ALL BOARD</caption>
+				<caption>ALL NOTICE</caption>
 				<tr>
 					<% if (loginMember != null) { 
 		  					if (loginMember.getMemid().equals("admin")) { %>
@@ -36,14 +36,14 @@
 								<th width="15%">작성일자</th>
 								<th width="10%">조회</th>
 				</tr>
-				<%=boardService.allBoardPrintAdmin() %>
+				<%=noticeService.allNoticePrintAdmin() %>
 			    		 <% } else { %>
 			    			 	<th width="55%">글제목</th>
 								<th width="20%">작성자</th>
 								<th width="15%">작성일자</th>
 								<th width="10%">조회</th>
 				</tr>
-				<%=boardService.allBoardPrint() %>
+				<%=noticeService.allNoticePrint() %>
 			    		 <% }
 		  			   } else { %>
 		  			   		<th width="55%">글제목</th>
@@ -51,7 +51,7 @@
 							<th width="15%">작성일자</th>
 							<th width="10%">조회</th>
 				</tr>
-				<%=boardService.allBoardPrint() %>
+				<%=noticeService.allNoticePrint() %>
 		  			   <% } %>
 			</table>
 		</div>
