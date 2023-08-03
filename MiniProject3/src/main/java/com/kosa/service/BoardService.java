@@ -22,8 +22,7 @@ public class BoardService {
 	
 	// 게시물 조회수 증가
 	public void increaseViews(int boardid) {
-		Board board = boardDao.getBoardByBoardid(boardid);
-		boardDao.increaseViews(boardid, board.getView_count());
+		boardDao.increaseViews(boardid);
 	}
 	
 	// 전체 게시물 가져오기 (관리자용)

@@ -228,7 +228,7 @@ public class OracleBoardDao implements BoardDao {
 	}
 	
 	@Override
-	public void increaseViews(int boardid, int view_count) {
+	public void increaseViews(int boardid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -236,16 +236,15 @@ public class OracleBoardDao implements BoardDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "update board set view_count = ? where boardid = ?";
+			sql = "update board set view_count = view_count + 1 where boardid = ?";
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(1, view_count + 1);
-			pstmt.setInt(2, boardid);
+			pstmt.setInt(1, boardid);
 			
 			row = pstmt.executeUpdate();
 			
 			if (row > 0) {
-				System.out.println(boardid + "번 글 조회수 " + (view_count + 1) + "로 증가");
+				System.out.println(boardid + "번 글 조회수 + 1");
 			}
 			else System.out.println("조회수 증가 실패");
 		} catch (Exception e) {

@@ -19,40 +19,29 @@
 	    	<%@ include file="../header.jsp" %>
 	    </header>
 	    <div id="listContainer">
-	    	<% if (loginMember != null) {
-	  			if (loginMember.getMemid().equals("admin")) { %>
+	    	<% if (loginMember != null && loginMember.isAdmin("admin")) { %>
     				<a href="writeNoticeForm.jsp" id="listWriteButton" class="detailBtns">글작성</a>
     				<a href="deleteNotices.jsp" id="listDeleteButton" class="detailBtns">삭제</a>
-		    	<% }
-	  		} %>
+		    <% } %>
 			<table class="table">
 				<caption>ALL NOTICE</caption>
 				<tr>
-					<% if (loginMember != null) { 
-		  					if (loginMember.getMemid().equals("admin")) { %>
-								<th width="5%"><input id="allCheck" type="checkbox"></th>
-								<th width="50%">글제목</th>
-								<th width="20%">작성자</th>
-								<th width="15%">작성일자</th>
-								<th width="10%">조회</th>
+					<% if (loginMember != null && loginMember.isAdmin("admin")) { %>
+							<th width="5%"><input id="allCheck" type="checkbox"></th>
+							<th width="50%">글제목</th>
+							<th width="20%">작성자</th>
+							<th width="15%">작성일자</th>
+							<th width="10%">조회</th>
 				</tr>
 				<%=noticeService.allNoticePrintAdmin() %>
-			    		 <% } else { %>
-			    			 	<th width="55%">글제목</th>
-								<th width="20%">작성자</th>
-								<th width="15%">작성일자</th>
-								<th width="10%">조회</th>
-				</tr>
-				<%=noticeService.allNoticePrint() %>
-			    		 <% }
-		  			   } else { %>
+			    	<% } else { %>
 		  			   		<th width="55%">글제목</th>
 							<th width="20%">작성자</th>
 							<th width="15%">작성일자</th>
 							<th width="10%">조회</th>
 				</tr>
 				<%=noticeService.allNoticePrint() %>
-		  			   <% } %>
+		  			<% } %>
 			</table>
 		</div>
 	    <footer>

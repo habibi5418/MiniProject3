@@ -8,44 +8,8 @@
 	BoardService boardService = new BoardService();
 	List<Board> recentBoardList = boardService.recent();
 
-	int boardid1 = recentBoardList.get(0).getBoardid();
-	int boardid2 = recentBoardList.get(1).getBoardid();
-	int boardid3 = recentBoardList.get(2).getBoardid();
-	int boardid4 = recentBoardList.get(3).getBoardid();
-	int boardid5 = recentBoardList.get(4).getBoardid();
-
-	String title1 = recentBoardList.get(0).getTitle();
-	String title2 = recentBoardList.get(1).getTitle();
-	String title3 = recentBoardList.get(2).getTitle();
-	String title4 = recentBoardList.get(3).getTitle();
-	String title5 = recentBoardList.get(4).getTitle();
-	
-	String reg_date1 = recentBoardList.get(0).getReg_date().substring(0, 10);
-	String reg_date2 = recentBoardList.get(1).getReg_date().substring(0, 10);
-	String reg_date3 = recentBoardList.get(2).getReg_date().substring(0, 10);
-	String reg_date4 = recentBoardList.get(3).getReg_date().substring(0, 10);
-	String reg_date5 = recentBoardList.get(4).getReg_date().substring(0, 10);
-
 	NoticeService noticeService = new NoticeService();
 	List<Notice> recentNoticeList = noticeService.recent();
-
-	int noticeid1 = recentNoticeList.get(0).getNoticeid();
-	int noticeid2 = recentNoticeList.get(1).getNoticeid();
-	int noticeid3 = recentNoticeList.get(2).getNoticeid();
-	int noticeid4 = recentNoticeList.get(3).getNoticeid();
-	int noticeid5 = recentNoticeList.get(4).getNoticeid();
-
-	String ntitle1 = recentNoticeList.get(0).getTitle();
-	String ntitle2 = recentNoticeList.get(1).getTitle();
-	String ntitle3 = recentNoticeList.get(2).getTitle();
-	String ntitle4 = recentNoticeList.get(3).getTitle();
-	String ntitle5 = recentNoticeList.get(4).getTitle();
-	
-	String nreg_date1 = recentNoticeList.get(0).getReg_date().substring(0, 10);
-	String nreg_date2 = recentNoticeList.get(1).getReg_date().substring(0, 10);
-	String nreg_date3 = recentNoticeList.get(2).getReg_date().substring(0, 10);
-	String nreg_date4 = recentNoticeList.get(3).getReg_date().substring(0, 10);
-	String nreg_date5 = recentNoticeList.get(4).getReg_date().substring(0, 10);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -81,11 +45,12 @@
           <a id="more">전체 보기</a>
           <div id="notice" class="tabContent">
             <ul>
-              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid1 %>"><%=ntitle1 %></a><span><%=nreg_date1 %></span></li>
-              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid2 %>"><%=ntitle2 %></a><span><%=nreg_date2 %></span></li>
-              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid3 %>"><%=ntitle3 %></a><span><%=nreg_date3 %></span></li>
-              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid4 %>"><%=ntitle4 %></a><span><%=nreg_date4 %></span></li>
-              <li><a href="notice/detailNotice.jsp?noticeid=<%=noticeid5 %>"><%=ntitle5 %></a><span><%=nreg_date5 %></span></li>
+              <% for (Notice notice : recentNoticeList) { %>
+	                <li><a href="notice/detailNotice.jsp?noticeid=<%=notice.getNoticeid() %>"><%=notice.getTitle() %></a><span><%=notice.getReg_date() %></span></li>
+	          <% } 
+	          	 if (recentNoticeList.size() == 0) { %>
+	          	 	<li><h3>게시물이 존재하지 않습니다.</h3></li>
+	          <% } %>
             </ul>
           </div>
           <div id="gallery" class="tabContent">
@@ -98,11 +63,12 @@
           </div>
           <div id="board" class="tabContent">
             <ul>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid1 %>"><%=title1 %></a><span><%=reg_date1 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid2 %>"><%=title2 %></a><span><%=reg_date2 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid3 %>"><%=title3 %></a><span><%=reg_date3 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid4 %>"><%=title4 %></a><span><%=reg_date4 %></span></li>
-              <li><a href="board/detailBoard.jsp?boardid=<%=boardid5 %>"><%=title5 %></a><span><%=reg_date5 %></span></li>
+              <% for (Board board : recentBoardList) { %>
+	                <li><a href="notice/detailBoard.jsp?boardid=<%=board.getBoardid() %>"><%=board.getTitle() %></a><span><%=board.getReg_date() %></span></li>
+	          <% } 
+	          	 if (recentBoardList.size() == 0) { %>
+	          	 	<li><h3>게시물이 존재하지 않습니다.</h3></li>
+	          <% } %>
             </ul>
           </div>
         </div>

@@ -22,8 +22,7 @@ public class NoticeService {
 	
 	// 게시물 조회수 증가
 	public void increaseViews(int noticeid) {
-		Notice notice = noticeDao.getNoticeByNoticeid(noticeid);
-		noticeDao.increaseViews(noticeid, notice.getView_count());
+		noticeDao.increaseViews(noticeid);
 	}
 
 	// 전체 게시물 가져오기 (관리자용)

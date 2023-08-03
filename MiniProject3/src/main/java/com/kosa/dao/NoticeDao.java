@@ -11,7 +11,7 @@ public interface NoticeDao {
 	int updateNotice(int noticeid, String title, String contents);
 	boolean deleteNotice(int noticeid);
 	List<Notice> findRecent5();
-	void increaseViews(int noticeid, int view_count);
+	void increaseViews(int noticeid);
 	String getAllNoticePrintAdmin();
 	String getAllNoticePrint();
 }

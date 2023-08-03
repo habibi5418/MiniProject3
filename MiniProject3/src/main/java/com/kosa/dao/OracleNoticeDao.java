@@ -231,7 +231,7 @@ public class OracleNoticeDao implements NoticeDao {
 	}
 	
 	@Override
-	public void increaseViews(int noticeid, int view_count) {
+	public void increaseViews(int noticeid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
@@ -239,16 +239,15 @@ public class OracleNoticeDao implements NoticeDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "update notice set view_count = ? where noticeid = ?";
+			sql = "update notice set view_count = view_count + 1 where noticeid = ?";
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(1, view_count + 1);
-			pstmt.setInt(2, noticeid);
+			pstmt.setInt(1, noticeid);
 			
 			row = pstmt.executeUpdate();
 			
 			if (row > 0) {
-				System.out.println(noticeid + "번 글 조회수 " + (view_count + 1) + "로 증가");
+				System.out.println(noticeid + "번 글 조회수 + 1");
 			}
 			else System.out.println("조회수 증가 실패");
 		} catch (Exception e) {

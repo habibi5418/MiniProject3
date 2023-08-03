@@ -38,4 +38,8 @@ public class Member implements Serializable {
 	public int hashCode() {
 		return Objects.hash(memid);
 	}
+
+	public boolean isAdmin(String memid) {
+		return this.memid.equals(memid);
+	}
 }
