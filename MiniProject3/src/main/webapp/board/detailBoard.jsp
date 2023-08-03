@@ -7,6 +7,13 @@
 	BoardService boardService = new BoardService();
 	boardService.increaseViews(boardid);
 	Board board = boardService.getBoardByBoardid(boardid);
+	if (board.getTitle() == null) { %>
+		<script>
+			alert("삭제된 게시물입니다.");
+			history.back();
+		</script>
+<% 		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -26,17 +33,21 @@
 			<div id="detailTitle">
 			    <h1><%=board.getTitle() %></h1>
 			    <p class="writer"><%=board.getWriter_uid() %></p>
-			    <p class="date"><%=board.getReg_date() %> 조회 <%=board.getView_count() %></p>
-
+			    <p class="date"><%=board.getReg_date() %> 
+			    <% if (board.doMod()) { %>
+			    	(수정시각 : <%=board.getMod_date() %>) 
+			    <% } %>
+			    	조회 <%=board.getView_count() %>
+			    </p>
 		    </div>
 		    <p class="contents"><%=board.getContents() %></p>
 	  	</div>
 	  	<% if (loginMember != null) {
 	  			if (loginMember.getMemid().equals(board.getWriter_uid())) { %>
 			    	<a href="updateBoardForm.jsp?boardid=<%=board.getBoardid() %>" id="updateButton" class="detailBtns">수정</a>
-			    	<a href="deleteBoardForm.jsp?boardid=<%=board.getBoardid() %>" id="deleteButton" class="detailBtns">삭제</a>
+			    	<a id="deleteButton" class="detailBtns">삭제</a>
 		    	<% } else if (loginMember.getMemid().equals("admin")) { %>
-		    		<a href="deleteBoardForm.jsp?boardid=<%=board.getBoardid() %>" id="deleteButton" class="detailBtns">삭제</a>
+		    		<a id="deleteButton" class="detailBtns">삭제</a>
 		    	<% }
 	  		} %>
   	</div>
@@ -44,5 +55,10 @@
     	<%@ include file="../footer.jsp" %>
     </footer>
   </div>
+  <script type="text/javascript">
+  	document.querySelector("#deleteButton").addEventListener("click", function() {
+  		if (confirm("게시물을 삭제하시겠습니까 ?")) location.href = "deleteBoard.jsp?boardid=<%=board.getBoardid() %>";
+  	});
+  </script>
 </body>
 </html>

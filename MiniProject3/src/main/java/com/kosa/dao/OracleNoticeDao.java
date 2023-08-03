@@ -23,7 +23,7 @@ public class OracleNoticeDao implements NoticeDao {
 				
 		try {
 			conn = ConnectionHelper.getConnection("oracle"); 
-			sql = "select * from notice order by noticeid desc";
+			sql = "select * from notice where delete_yn = 'N' order by noticeid desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -64,7 +64,7 @@ public class OracleNoticeDao implements NoticeDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "select * from notice where noticeid = ?";
+			sql = "select * from notice where noticeid = ? and delete_yn = 'N'";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, noticeid);
@@ -156,18 +156,17 @@ public class OracleNoticeDao implements NoticeDao {
 		return row;
 	}
 
-	// 5. delete 조건 where noticeid = ?
+	// 5. update set delete_yn = ? (실질적 삭제 X)
 	@Override
-	public boolean deleteNotice(int noticeid) {
+	public int deleteNotice(int noticeid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		int row = 0;
-		boolean result = false;
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "delete from notice where noticeid = ?";
+			sql = "update notice set delete_yn = 'Y' where noticeid = ?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, noticeid);
@@ -175,7 +174,6 @@ public class OracleNoticeDao implements NoticeDao {
 			row = pstmt.executeUpdate();
 			
 			if (row > 0) {
-				result = true;
 				System.out.println(noticeid + "번 글 삭제 완료");
 			}
 			else System.out.println("글 삭제 실패");
@@ -186,7 +184,7 @@ public class OracleNoticeDao implements NoticeDao {
 			ConnectionHelper.close(conn);
 		}
 		
-		return result;
+		return row;
 	}
 	
 	// 최근 글 5개 조회
@@ -200,7 +198,7 @@ public class OracleNoticeDao implements NoticeDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "select * from (select * from notice order by noticeid desc) where rownum <= 5";
+			sql = "select * from (select * from notice where delete_yn = 'N' order by noticeid desc) where rownum <= 5";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			

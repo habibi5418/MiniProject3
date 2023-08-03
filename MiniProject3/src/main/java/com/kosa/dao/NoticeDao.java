@@ -9,7 +9,7 @@ public interface NoticeDao {
 	Notice getNoticeByNoticeid(int noticeid);
 	int writeNotice(String title, String contents, String writer_uid);
 	int updateNotice(int noticeid, String title, String contents);
-	boolean deleteNotice(int noticeid);
+	int deleteNotice(int noticeid);
 	List<Notice> findRecent5();
 	void increaseViews(int noticeid);
 	String getAllNoticePrintAdmin();

@@ -44,4 +44,9 @@ public class BoardService {
 	public int update(int boardid, String title, String contents) {
 		return boardDao.updateBoard(boardid, title, contents);
 	}
+	
+	// 글 삭제
+	public int delete(int boardid) {
+		return boardDao.deleteBoard(boardid);
+	}
 }

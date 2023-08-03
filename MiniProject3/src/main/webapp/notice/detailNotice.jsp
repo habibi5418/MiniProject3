@@ -7,6 +7,13 @@
 	NoticeService noticeService = new NoticeService();
 	noticeService.increaseViews(noticeid);
 	Notice notice = noticeService.getNoticeByNoticeid(noticeid);
+	if (notice.getTitle() == null) { %>
+		<script>
+			alert("삭제된 게시물입니다.");
+			history.back();
+		</script>
+<% 		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -26,15 +33,19 @@
 			<div id="detailTitle">
 			    <h1><%=notice.getTitle() %></h1>
 			    <p class="writer"><%=notice.getWriter_uid() %></p>
-			    <p class="date"><%=notice.getReg_date() %> 조회 <%=notice.getView_count() %></p>
-
+			    <p class="date"><%=notice.getReg_date() %> 
+			    <% if (notice.doMod()) { %>
+			    	(수정시각 : <%=notice.getMod_date() %>) 
+			    <% } %>
+			    	조회 <%=notice.getView_count() %>
+			    </p>
 		    </div>
 		    <p class="contents"><%=notice.getContents() %></p>
 	  	</div>
 	  	<% if (loginMember != null) {
 	  			if (loginMember.getMemid().equals("admin")) { %>
 			    	<a href="updateNoticeForm.jsp?noticeid=<%=notice.getNoticeid() %>" id="updateButton" class="detailBtns">수정</a>
-			    	<a href="deleteNoticeForm.jsp?noticeid=<%=notice.getNoticeid() %>" id="deleteButton" class="detailBtns">삭제</a>
+			    	<a id="deleteButton" class="detailBtns">삭제</a>
 		    	<% }
 	  		} %>
   	</div>
@@ -42,5 +53,10 @@
     	<%@ include file="../footer.jsp" %>
     </footer>
   </div>
+  <script type="text/javascript">
+  	document.querySelector("#deleteButton").addEventListener("click", function() {
+  		if (confirm("게시물을 삭제하시겠습니까 ?")) location.href = "deleteNotice.jsp?noticeid=<%=notice.getNoticeid() %>";
+  	});
+  </script>
 </body>
 </html>

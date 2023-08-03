@@ -5,18 +5,18 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int boardid = Integer.parseInt(request.getParameter("boardid"));
-	String newTitle = request.getParameter("title");
-	String newContents = request.getParameter("content");
 	String message = "";
-	String location = "detailBoard.jsp?boardid=" + boardid;
+	String location = "";
 	
 	BoardService boardService = new BoardService();
-	int row = boardService.update(boardid, newTitle, newContents);
+	int row = boardService.delete(boardid);
 	
 	if (row > 0) {
-		message = "글 수정이 완료되었습니다.";
+		message = "글 삭제가 완료되었습니다.";
+		location = "listBoard.jsp";
 	} else {
-		message = "글 수정에 실패하였습니다.";
+		message = "글 삭제에 실패하였습니다.";
+		location = "detailBoard.jsp?boardid=" + boardid;
 	}
 %>
 

@@ -17,4 +17,8 @@ public class Notice {
 	private int view_count;
 	private String delete_yn;
 	private String fixed_yn;
+	
+	public boolean doMod() {
+		return !reg_date.equals(mod_date);
+	}
 }

@@ -9,7 +9,7 @@ public interface BoardDao {
 	Board getBoardByBoardid(int boardid);
 	public int writeBoard(String title, String contents, String writer_uid);
 	int updateBoard(int boardid, String title, String contents);
-	boolean deleteBoard(int boardid);
+	int deleteBoard(int boardid);
 	List<Board> findRecent5();
 	void increaseViews(int boardid);
 	String getAllBoardPrintAdmin();

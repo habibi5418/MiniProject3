@@ -16,4 +16,8 @@ public class Board {
 	private String mod_date;
 	private int view_count;
 	private String delete_yn;
+	
+	public boolean doMod() {
+		return !reg_date.equals(mod_date);
+	}
 }

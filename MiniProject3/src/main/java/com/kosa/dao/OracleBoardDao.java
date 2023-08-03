@@ -23,7 +23,7 @@ public class OracleBoardDao implements BoardDao {
 				
 		try {
 			conn = ConnectionHelper.getConnection("oracle"); 
-			sql = "select * from board order by boardid desc";
+			sql = "select * from board where delete_yn = 'N' order by boardid desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -63,7 +63,7 @@ public class OracleBoardDao implements BoardDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "select * from board where boardid = ?";
+			sql = "select * from board where boardid = ? and delete_yn = 'N'";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, boardid);
@@ -154,18 +154,17 @@ public class OracleBoardDao implements BoardDao {
 		return row;
 	}
 
-	// 5. delete 조건 where boardid = ?
+	// 5. update set delete_yn = ? (실질적 삭제 X)
 	@Override
-	public boolean deleteBoard(int boardid) {
+	public int deleteBoard(int boardid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "";
 		int row = 0;
-		boolean result = false;
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "delete from board where boardid = ?";
+			sql = "update board set delete_yn = 'Y' where boardid = ?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, boardid);
@@ -173,10 +172,9 @@ public class OracleBoardDao implements BoardDao {
 			row = pstmt.executeUpdate();
 			
 			if (row > 0) {
-				result = true;
-				System.out.println(boardid + "번 글 삭제 완료");
+				System.out.println(boardid + "번 글 삭제 처리 완료");
 			}
-			else System.out.println("글 삭제 실패");
+			else System.out.println("글 삭제 처리 실패");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -184,7 +182,7 @@ public class OracleBoardDao implements BoardDao {
 			ConnectionHelper.close(conn);
 		}
 		
-		return result;
+		return row;
 	}
 	
 	// 최근 글 5개 조회
@@ -198,7 +196,7 @@ public class OracleBoardDao implements BoardDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "select * from (select * from board order by boardid desc) where rownum <= 5";
+			sql = "select * from (select * from board where delete_yn = 'N' order by boardid desc) where rownum <= 5";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			

@@ -5,18 +5,18 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int noticeid = Integer.parseInt(request.getParameter("noticeid"));
-	String newTitle = request.getParameter("title");
-	String newContents = request.getParameter("content");
 	String message = "";
-	String location = "detailNotice.jsp?noticeid=" + noticeid;
+	String location = "";
 	
 	NoticeService noticeService = new NoticeService();
-	int row = noticeService.update(noticeid, newTitle, newContents);
+	int row = noticeService.delete(noticeid);
 	
 	if (row > 0) {
-		message = "글 수정이 완료되었습니다.";
+		message = "글 삭제가 완료되었습니다.";
+		location = "listNotice.jsp";
 	} else {
-		message = "글 수정에 실패하였습니다.";
+		message = "글 삭제에 실패하였습니다.";
+		location = "detailNotice.jsp?noticeid=" + noticeid;
 	}
 %>
 

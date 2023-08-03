@@ -44,4 +44,9 @@ public class NoticeService {
 	public int update(int noticeid, String title, String contents) {
 		return noticeDao.updateNotice(noticeid, title, contents);
 	}
+	
+	// 글 수정
+	public int delete(int noticeid) {
+		return noticeDao.deleteNotice(noticeid);
+	}
 }
