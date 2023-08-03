@@ -22,7 +22,7 @@
     		<% if (loginMember != null) { %>
         		<a href="writeBoardForm.jsp" id="listWriteButton" class="detailBtns">글작성</a>
 	  			<% if (loginMember.getMemid().equals("admin")) { %>
-    				<a href="deleteBoards.jsp" id="listDeleteButton" class="detailBtns">삭제</a>
+    				<a id="listDeleteButton" class="detailBtns">삭제</a>
 		    	<% }
 	  		} %>
 			<table class="table">
@@ -57,6 +57,20 @@
     			checkbox.checked = this.checked;
     		});
     	});
+    	
+    	document.querySelector("#listDeleteButton").addEventListener("click", function() {
+      		if (confirm("선택한 게시물들을 삭제하시겠습니까 ?")) {
+        		var deleteBoards = "";
+        		var checks2 = document.querySelectorAll("input[type='checkbox']");
+        		
+        		checks2.forEach(checkbox => {
+        			if (checkbox.checked) deleteBoards += checkbox.value + ",";
+        		});
+        		deleteBoards = deleteBoards.substr(0, deleteBoards.length - 1);
+        		
+      			location.href = "deleteBoards.jsp?deleteBoards=" + deleteBoards;
+      		}
+      	});
     </script>
 </body>
 </html>

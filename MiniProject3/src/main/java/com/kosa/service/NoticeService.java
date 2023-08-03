@@ -49,4 +49,9 @@ public class NoticeService {
 	public int delete(int noticeid) {
 		return noticeDao.deleteNotice(noticeid);
 	}
+	
+	// 선택 글 삭제 (관리자)
+	public int deletes(String deleteNotices) {
+		return noticeDao.deleteNotices(deleteNotices);
+	}
 }

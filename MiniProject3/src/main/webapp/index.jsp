@@ -64,7 +64,7 @@
           <div id="board" class="tabContent">
             <ul>
               <% for (Board board : recentBoardList) { %>
-	                <li><a href="notice/detailBoard.jsp?boardid=<%=board.getBoardid() %>"><%=board.getTitle() %></a><span><%=board.getReg_date() %></span></li>
+	                <li><a href="board/detailBoard.jsp?boardid=<%=board.getBoardid() %>"><%=board.getTitle() %></a><span><%=board.getReg_date() %></span></li>
 	          <% } 
 	          	 if (recentBoardList.size() == 0) { %>
 	          	 	<li><h3>게시물이 존재하지 않습니다.</h3></li>

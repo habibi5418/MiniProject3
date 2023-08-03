@@ -184,6 +184,35 @@ public class OracleBoardDao implements BoardDao {
 		
 		return row;
 	}
+
+	// 5-2. 선택한 여러 글 삭제 update set delete_yn = ? (실질적 삭제 X)
+	@Override
+	public int deleteBoards(String deleteBoards) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		int row = 0;
+		
+		try {
+			conn = ConnectionHelper.getConnection("oracle");
+			sql = "update board set delete_yn = 'Y' where boardid in(" + deleteBoards + ")";
+			pstmt = conn.prepareStatement(sql);
+
+			row = pstmt.executeUpdate();
+			
+			if (row > 0) {
+				System.out.println(deleteBoards + "번 글 삭제 처리 완료");
+			}
+			else System.out.println("선택 글 삭제 처리 실패");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionHelper.close(pstmt);
+			ConnectionHelper.close(conn);
+		}
+		
+		return row;
+	}
 	
 	// 최근 글 5개 조회
 	@Override
@@ -225,6 +254,7 @@ public class OracleBoardDao implements BoardDao {
 		return boardList;
 	}
 	
+	// 조회수 증가
 	@Override
 	public void increaseViews(int boardid) {
 		Connection conn = null;
@@ -253,18 +283,20 @@ public class OracleBoardDao implements BoardDao {
 		}
 	}
 	
+	// 전체 게시물 조회 (관리자)
 	String table = "";
 	@Override
 	public String getAllBoardPrintAdmin() {
 		List<Board> boardList = getAllBoardList();
 		
 		boardList.stream().forEach(m -> {
-			table += "<tr><td>" + "<input type='checkbox'>" + "</td><td><a href='detailBoard.jsp?boardid=" + m.getBoardid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
+			table += "<tr><td>" + "<input type='checkbox' value='" + m.getBoardid() + "'>" + "</td><td><a href='detailBoard.jsp?boardid=" + m.getBoardid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
 		});
 		
 		return table;
 	}
-	
+
+	// 전체 게시물 조회 (일반)
 	@Override
 	public String getAllBoardPrint() {
 		List<Board> boardList = getAllBoardList();

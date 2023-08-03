@@ -186,6 +186,35 @@ public class OracleNoticeDao implements NoticeDao {
 		
 		return row;
 	}
+
+	// 5-2. 선택 글 삭제 update set delete_yn = ? (실질적 삭제 X)
+	@Override
+	public int deleteNotices(String deleteNotices) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		int row = 0;
+		
+		try {
+			conn = ConnectionHelper.getConnection("oracle");
+			sql = "update notice set delete_yn = 'Y' where noticeid in(" + deleteNotices + ")";
+			pstmt = conn.prepareStatement(sql);
+
+			row = pstmt.executeUpdate();
+			
+			if (row > 0) {
+				System.out.println(deleteNotices + "번 글 삭제 완료");
+			}
+			else System.out.println("글 삭제 실패");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionHelper.close(pstmt);
+			ConnectionHelper.close(conn);
+		}
+		
+		return row;
+	}
 	
 	// 최근 글 5개 조회
 	@Override
@@ -228,6 +257,7 @@ public class OracleNoticeDao implements NoticeDao {
 		return noticeList;
 	}
 	
+	// 조회수 증가
 	@Override
 	public void increaseViews(int noticeid) {
 		Connection conn = null;
@@ -256,18 +286,20 @@ public class OracleNoticeDao implements NoticeDao {
 		}
 	}
 
+	// 전체 글 조회 (관리자)
 	String table = "";
 	@Override
 	public String getAllNoticePrintAdmin() {
 		List<Notice> noticeList = getAllNoticeList();
 		
 		noticeList.stream().forEach(m -> {
-			table += "<tr><td>" + "<input type='checkbox'>" + "</td><td><a href='detailNotice.jsp?noticeid=" + m.getNoticeid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
+			table += "<tr><td>" + "<input type='checkbox' value='" + m.getNoticeid() + "'>" + "</td><td><a href='detailNotice.jsp?noticeid=" + m.getNoticeid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
 		});
 		
 		return table;
 	}
-	
+
+	// 전체 글 조회 (일반)
 	@Override
 	public String getAllNoticePrint() {
 		List<Notice> noticeList = getAllNoticeList();

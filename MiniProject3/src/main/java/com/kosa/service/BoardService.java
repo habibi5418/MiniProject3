@@ -49,4 +49,9 @@ public class BoardService {
 	public int delete(int boardid) {
 		return boardDao.deleteBoard(boardid);
 	}
+	
+	// 선택 글 삭제 (관리자)
+ 	public int deletes(String deleteBoards) {
+		return boardDao.deleteBoards(deleteBoards);
+	}
 }

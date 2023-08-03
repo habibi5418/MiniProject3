@@ -21,7 +21,7 @@
 	    <div id="listContainer">
 	    	<% if (loginMember != null && loginMember.isAdmin("admin")) { %>
     				<a href="writeNoticeForm.jsp" id="listWriteButton" class="detailBtns">글작성</a>
-    				<a href="deleteNotices.jsp" id="listDeleteButton" class="detailBtns">삭제</a>
+    				<a id="listDeleteButton" class="detailBtns">삭제</a>
 		    <% } %>
 			<table class="table">
 				<caption>ALL NOTICE</caption>
@@ -55,6 +55,20 @@
     			checkbox.checked = this.checked;
     		});
     	});
+    	
+    	document.querySelector("#listDeleteButton").addEventListener("click", function() {
+      		if (confirm("선택한 게시물들을 삭제하시겠습니까 ?")) {
+        		var deleteNotices = "";
+        		var checks2 = document.querySelectorAll("input[type='checkbox']");
+        		
+        		checks2.forEach(checkbox => {
+        			if (checkbox.checked) deleteNotices += checkbox.value + ",";
+        		});
+        		deleteNotices = deleteNotices.substr(0, deleteNotices.length - 1);
+        		
+      			location.href = "deleteNotices.jsp?deleteNotices=" + deleteNotices;
+      		}
+      	});
     </script>
 </body>
 </html>
