@@ -15,4 +15,5 @@ public interface NoticeDao {
 	void increaseViews(int noticeid);
 	String getAllNoticePrintAdmin();
 	String getAllNoticePrint();
+	int fixNotice(int noticeid, String doYN);
 }

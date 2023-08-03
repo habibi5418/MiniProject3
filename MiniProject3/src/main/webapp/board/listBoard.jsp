@@ -66,9 +66,13 @@
         		checks2.forEach(checkbox => {
         			if (checkbox.checked) deleteBoards += checkbox.value + ",";
         		});
-        		deleteBoards = deleteBoards.substr(0, deleteBoards.length - 1);
         		
-      			location.href = "deleteBoards.jsp?deleteBoards=" + deleteBoards;
+        		if (deleteBoards == "") {
+        			alert("삭제할 게시물을 체크해주세요.");
+        		} else {
+	        		deleteBoards = deleteBoards.substr(0, deleteBoards.length - 1);
+	      			location.href = "deleteBoards.jsp?deleteBoards=" + deleteBoards;
+        		}
       		}
       	});
     </script>

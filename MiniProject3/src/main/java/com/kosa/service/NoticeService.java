@@ -54,4 +54,9 @@ public class NoticeService {
 	public int deletes(String deleteNotices) {
 		return noticeDao.deleteNotices(deleteNotices);
 	}
+	
+	// 글 고정 (관리자)
+	public int fix(int noticeid, String doYN) {
+		return noticeDao.fixNotice(noticeid, doYN);
+	}
 }

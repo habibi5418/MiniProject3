@@ -64,9 +64,13 @@
         		checks2.forEach(checkbox => {
         			if (checkbox.checked) deleteNotices += checkbox.value + ",";
         		});
-        		deleteNotices = deleteNotices.substr(0, deleteNotices.length - 1);
         		
-      			location.href = "deleteNotices.jsp?deleteNotices=" + deleteNotices;
+        		if (deleteNotices == "") {
+        			alert("삭제할 게시물을 체크해주세요.");
+        		} else {
+            		deleteNotices = deleteNotices.substr(0, deleteNotices.length - 1);
+      				location.href = "deleteNotices.jsp?deleteNotices=" + deleteNotices;
+        		}
       		}
       	});
     </script>

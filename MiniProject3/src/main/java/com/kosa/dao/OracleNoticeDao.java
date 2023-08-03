@@ -23,7 +23,7 @@ public class OracleNoticeDao implements NoticeDao {
 				
 		try {
 			conn = ConnectionHelper.getConnection("oracle"); 
-			sql = "select * from notice where delete_yn = 'N' order by noticeid desc";
+			sql = "select * from notice where delete_yn = 'N' order by fixed_yn desc, noticeid desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -227,7 +227,7 @@ public class OracleNoticeDao implements NoticeDao {
 		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			sql = "select * from (select * from notice where delete_yn = 'N' order by noticeid desc) where rownum <= 5";
+			sql = "select * from (select * from notice where delete_yn = 'N' order by fixed_yn desc, noticeid desc) where rownum <= 5";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -293,7 +293,11 @@ public class OracleNoticeDao implements NoticeDao {
 		List<Notice> noticeList = getAllNoticeList();
 		
 		noticeList.stream().forEach(m -> {
-			table += "<tr><td>" + "<input type='checkbox' value='" + m.getNoticeid() + "'>" + "</td><td><a href='detailNotice.jsp?noticeid=" + m.getNoticeid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
+			if (m.getFixed_yn().equals("Y")) {
+				table += "<tr class='fixed'><td>" + "<input type='checkbox' value='" + m.getNoticeid() + "'>" + "</td><td><a href='detailNotice.jsp?noticeid=" + m.getNoticeid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
+			} else {
+				table += "<tr><td>" + "<input type='checkbox' value='" + m.getNoticeid() + "'>" + "</td><td><a href='detailNotice.jsp?noticeid=" + m.getNoticeid() + "'>" + m.getTitle() + "</a></td><td>" + m.getWriter_uid() + "</td><td>" + m.getReg_date() + "</td><td>" + m.getView_count() + "</td></tr>";
+			}
 		});
 		
 		return table;
@@ -309,5 +313,36 @@ public class OracleNoticeDao implements NoticeDao {
 		});
 		
 		return table;
+	}
+
+	// 글 고정 update set fixed_yn = ? (실질적 삭제 X)
+	@Override
+	public int fixNotice(int noticeid, String doYN) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		int row = 0;
+		
+		try {
+			conn = ConnectionHelper.getConnection("oracle");
+			sql = "update notice set fixed_yn = '" + doYN + "' where noticeid = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, noticeid);
+			
+			row = pstmt.executeUpdate();
+			
+			if (row > 0) {
+				System.out.println(noticeid + "번 글 고정(해제) 완료");
+			}
+			else System.out.println("글 고정(해제) 실패");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionHelper.close(pstmt);
+			ConnectionHelper.close(conn);
+		}
+		
+		return row;
 	}
 }

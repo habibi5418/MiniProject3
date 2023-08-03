@@ -20,7 +20,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 상세페이지 - <%=notice.getTitle() %></title>
-<link rel="stylesheet" href="../css/style-index.css?ver=1">
+<link rel="stylesheet" href="../css/style-index.css?ver=12">
 </head>
 <body>
   <div id="container">
@@ -42,12 +42,11 @@
 		    </div>
 		    <p class="contents"><%=notice.getContents() %></p>
 	  	</div>
-	  	<% if (loginMember != null) {
-	  			if (loginMember.getMemid().equals("admin")) { %>
-			    	<a href="updateNoticeForm.jsp?noticeid=<%=notice.getNoticeid() %>" id="updateButton" class="detailBtns">수정</a>
-			    	<a id="deleteButton" class="detailBtns">삭제</a>
-		    	<% }
-	  		} %>
+	  	<% if (loginMember != null && loginMember.getMemid().equals("admin")) { %>
+	  			<a id="fixButton" class="detailBtns">고정</a>
+		    	<a href="updateNoticeForm.jsp?noticeid=<%=notice.getNoticeid() %>" id="updateButton" class="detailBtns">수정</a>
+		    	<a id="deleteButton" class="detailBtns">삭제</a>
+	  	<% } %>
   	</div>
     <footer>
     	<%@ include file="../footer.jsp" %>
@@ -56,6 +55,14 @@
   <script type="text/javascript">
   	document.querySelector("#deleteButton").addEventListener("click", function() {
   		if (confirm("게시물을 삭제하시겠습니까 ?")) location.href = "deleteNotice.jsp?noticeid=<%=notice.getNoticeid() %>";
+  	});
+
+  	document.querySelector("#fixButton").addEventListener("click", function() {
+  		if (<%=notice.getFixed_yn().equals("N") %>) {
+  			if (confirm("게시물을 고정하시겠습니까 ?")) location.href = "fixNotice.jsp?noticeid=<%=notice.getNoticeid() %>&doYN=Y";
+  		} else if (<%=notice.getFixed_yn().equals("Y") %>) {
+  			if (confirm("게시물을 고정 해제하시겠습니까 ?")) location.href = "fixNotice.jsp?noticeid=<%=notice.getNoticeid() %>&doYN=N";
+  		}
   	});
   </script>
 </body>
